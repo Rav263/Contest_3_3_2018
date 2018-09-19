@@ -1,4 +1,13 @@
 #include <stdio.h>
+#include <math.h>
+
+
+enum
+{
+    MAX_PRECENTAGES = 100,
+    ROUND_CONST = 10000,
+    MAX_COURSE = 10000
+};
 
 int
 main(int argc, char *argv[]) 
@@ -9,11 +18,10 @@ main(int argc, char *argv[])
         return 1;
     }
 
-    
+
     if (sscanf(argv[1], "%lf", &course) != 1) {
         return 1;
     }
-
 
     for (int i = 2; i < argc; i++){
         double now;
@@ -21,12 +29,19 @@ main(int argc, char *argv[])
         if (sscanf(argv[i], "%lf", &now) != 1) {
             return 1;
         }
-
-        if (now <= -100 || now >= 100) {
+        if (now <= -MAX_PRECENTAGES || now >= MAX_PRECENTAGES) {
             return 1;
         }
 
-        course *= (100 + now) / 100;
+        course *= (MAX_PRECENTAGES + now) / MAX_PRECENTAGES;
+   
+        course *= ROUND_CONST;
+
+        course = (double)round(course) / ROUND_CONST;
+
+        if (course <= 0 && course > MAX_COURSE) {
+            return 1;
+        }
     }
 
     printf("%.4lf\n", course);
