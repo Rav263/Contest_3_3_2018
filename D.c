@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <string.h>
+
 
 enum
 {
-    NUM_OF_BYTES = 8,
-    NUM_OF_BITS = 8,
-    MASK_ILON = 0x80
+    NUM_OF_BYTES = 8, //number of bytes in sequence
+    NUM_OF_BITS = 8, //number of bit in bytes
+    MASK_ILON = 0x80 //mask for extracting the high-order bit
 };
 
 
@@ -17,22 +19,14 @@ print_array(unsigned char *array, int n)
 }
 
 
-void
-full_array_zeros(unsigned char *array, int n)
-{
-    for (int i = 0; i < n; i++) {
-        array[i] = 0;
-    }
-}
-
 int
 main(void)
 {
     unsigned char now;
 
     unsigned char out_array[NUM_OF_BYTES];
-    
-    full_array_zeros(out_array, NUM_OF_BYTES);
+
+    memset(out_array, 0, NUM_OF_BYTES);
 
     for (int j = 0; scanf("%hhx", &now) == 1; j++, j %= NUM_OF_BYTES) {
         for (int i = 0; i < NUM_OF_BITS; i++) {
@@ -49,7 +43,7 @@ main(void)
         if (j == NUM_OF_BYTES - 1) {
             print_array(out_array, NUM_OF_BYTES);
             
-            full_array_zeros(out_array, NUM_OF_BYTES);
+            memset(out_array, 0, NUM_OF_BYTES);
         }
     }
 

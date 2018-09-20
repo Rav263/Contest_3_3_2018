@@ -4,9 +4,9 @@
 
 enum
 {
-    MAX_PRECENTAGES = 100,
-    ROUND_CONST = 10000,
-    MAX_COURSE = 10000
+    MAX_PRECENTAGES = 100, //max precentages value of variation of rate
+    ROUND_CONST = 10000, //Rounding constat of rate every day
+    MAX_COURSE = 10000 //max rate that may be in a problem
 };
 
 int
