@@ -4,22 +4,22 @@
 
 enum
 {
-    MAX_PRECENTAGES = 100, //max precentages value of variation of rate
-    ROUND_CONST = 10000, //Rounding constat of rate every day
-    MAX_COURSE = 10000 //max rate that may be in a problem
+    MAX_PRECENTAGES = 100, //The maximum change absolute rate per day in percent.
+    ROUND_CONST = 10000, //Constant of rounding the rate per day
+    MAX_RATE = 10000 //limit of rate possible be per day
 };
 
 int
 main(int argc, char *argv[]) 
 {
-    double course;
+    double rate;
 
     if (argc == 1) {
         return 1;
     }
 
 
-    if (sscanf(argv[1], "%lf", &course) != 1) {
+    if (sscanf(argv[1], "%lf", &rate) != 1) {
         return 1;
     }
 
@@ -33,18 +33,18 @@ main(int argc, char *argv[])
             return 1;
         }
 
-        course *= (MAX_PRECENTAGES + now) / MAX_PRECENTAGES;
+        rate *= (MAX_PRECENTAGES + now) / MAX_PRECENTAGES;
    
-        course *= ROUND_CONST;
+        rate *= ROUND_CONST;
 
-        course = (double)round(course) / ROUND_CONST;
+        rate = (double)round(rate) / ROUND_CONST;
 
-        if (course <= 0 && course > MAX_COURSE) {
+        if (rate <= 0 && rate > MAX_RATE) {
             return 1;
         }
     }
 
-    printf("%.4lf\n", course);
+    printf("%.4lf\n", rate);
 
     return 0;
 }

@@ -30,7 +30,7 @@ main(void)
 
     for (int j = 0; scanf("%hhx", &now) == 1; j++, j %= NUM_OF_BYTES) {
         for (int i = 0; i < NUM_OF_BITS; i++) {
-            out_array[i] += (now % 2) * MASK_ILON;
+            out_array[i] += (now & 1) * MASK_ILON;
             
             now >>= 1;
         }
