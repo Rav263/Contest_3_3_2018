@@ -4,9 +4,9 @@
 
 enum
 {
-    MAX_PRECENTAGES = 100, //The maximum change absolute rate per day in percent.
-    ROUND_CONST = 10000, //Constant of rounding the rate per day
-    MAX_RATE = 10000 //limit of rate possible be per day
+    MAX_PRECENTAGES = 100, //Constant for the validation rate changes per day.
+    ROUND_CONST = 10000, //Constant for correct rounding of the rate.
+    MAX_RATE = 10000 //limit of rate possible be per day.
 };
 
 int

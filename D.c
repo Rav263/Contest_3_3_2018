@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <limits.h>
 
 enum
 {
     NUM_OF_BYTES = 8, //number of bytes in sequence
-    NUM_OF_BITS = 8, //number of bit in bytes
     MASK_ILON = 0x80 //mask for extracting the high-order bit
 };
 
@@ -29,7 +28,7 @@ main(void)
     memset(out_array, 0, NUM_OF_BYTES);
 
     for (int j = 0; scanf("%hhx", &now) == 1; j++, j %= NUM_OF_BYTES) {
-        for (int i = 0; i < NUM_OF_BITS; i++) {
+        for (int i = 0; i < CHAR_BIT; i++) {
             out_array[i] += (now & 1) * MASK_ILON;
             
             now >>= 1;
