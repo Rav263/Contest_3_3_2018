@@ -4,7 +4,7 @@
 
 enum
 {
-    NUM_OF_BYTES = 8, //number of bytes in sequence
+    NUM_OF_BYTES = CHAR_BIT, //number of bytes in sequence
     MASK_ILON = 0x80 //mask for extracting the high-order bit
 };
 
@@ -27,12 +27,9 @@ main(void)
 
     memset(out_array, 0, NUM_OF_BYTES);
 
-    for (int j = 0; scanf("%hhx", &now) == 1; j++, j %= NUM_OF_BYTES) {
-        /* So, in the last reject, you asked me to use "not for".
-         * I don't know why. "For" is beautifull and amazing. 
-         * Here i need to use counter variable. And if i will use while
-         * it will be local variable for all programm, it's not good;
-         */
+    int j = 0; 
+    
+    while (scanf("%hhx", &now) == 1) { 
         for (int i = 0; i < NUM_OF_BYTES; i++) {
             out_array[i] += (now & 1) * MASK_ILON;
             
@@ -49,6 +46,8 @@ main(void)
             
             memset(out_array, 0, NUM_OF_BYTES);
         }
+        j++;
+        j %= NUM_OF_BYTES;
     }
 
     printf("\n");
