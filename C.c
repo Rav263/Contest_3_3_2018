@@ -4,22 +4,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-unsigned int
-reverce_num(unsigned int number)
-{
-    unsigned int result = 0;
-
-    for (int i = 0; i < 3; i++) {
-        result += number & 0xFF;
-
-        number >>= 8;
-        result <<= 8;
-    }
-    result += number & 0xFF;
-
-    return result;
-}
+#include <endian.h>
+#include <stdint.h>
 
 int
 main(int argc, char *argv[])
@@ -33,10 +19,10 @@ main(int argc, char *argv[])
         return 1;
     }
 
-    unsigned int now;
+    uint32_t now;
 
     while (scanf("%u", &now) == 1) {
-        unsigned int rev_num = reverce_num(now);
+        uint32_t rev_num = htobe32(now);
 
         write(fd, &rev_num, sizeof(rev_num));
     }
