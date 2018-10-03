@@ -4,10 +4,11 @@
 
 enum
 {
-    MAX_PRECENTAGES = 100, //Constant for the validation rate changes per day.
-    ROUND_CONST = 10000, //Constant for correct rounding of the rate.
-    MAX_RATE = 10000 //limit of rate possible be per day.
+    MAX_PRECENTAGES = 100, //Максимальное изменение курса в процентах
+    MAX_RATE = 10000, //Максимально возможный курс
+    ROUND_VALUE = 10000 //Константа для округления курса до n знаков после запятой равная 10^n.
 };
+
 
 int
 main(int argc, char *argv[]) 
@@ -35,9 +36,7 @@ main(int argc, char *argv[])
 
         rate *= (MAX_PRECENTAGES + now) / MAX_PRECENTAGES;
    
-        rate *= ROUND_CONST;
-
-        rate = (double)round(rate) / ROUND_CONST;
+        rate = (double) round(rate * ROUND_VALUE) / ROUND_VALUE;
 
         if (rate <= 0 && rate > MAX_RATE) {
             return 1;
