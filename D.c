@@ -5,7 +5,7 @@
 enum
 {
     NUM_OF_BYTES = CHAR_BIT, //number of bytes in sequence
-    MASK_ILON = 0x80 //mask for extracting the high-order bit
+    MASK_ILON = 7 //mask for extracting the high-order bit
 };
 
 
@@ -31,7 +31,7 @@ main(void)
     
     while (scanf("%hhx", &now) == 1) { 
         for (int i = 0; i < NUM_OF_BYTES; i++) {
-            out_array[i] += (now & 1) * MASK_ILON;
+            out_array[i] += (now & 1) << MASK_ILON;
             
             now >>= 1;
         }
