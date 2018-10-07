@@ -5,7 +5,7 @@
 enum
 {
     NUM_OF_BYTES = CHAR_BIT, //number of bytes in sequence
-    MASK_ILON = 7 //mask for extracting the high-order bit
+    MASK_ILON = CHAR_BIT - 1 //mask for extracting the high-order bit
 };
 
 
