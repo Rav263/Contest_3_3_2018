@@ -7,28 +7,10 @@
 #include <stdint.h>
 #include <limits.h>
 
-enum 
+enum
 {
-    BYTE_MASK = 256
+    BYTES_IN_NUM = 4
 };
-
-
-uint32_t
-reverse_num(uint32_t number)
-{
-    uint32_t result = 0;
-
-    for (int i = 0; i < sizeof(result); i++) {
-        result += number % BYTE_MASK;
-        number /= BYTE_MASK;
-        if (i != 3) {
-            result <<= CHAR_BIT;
-        }
-    }
-
-    return result;
-}
-
 
 
 int
@@ -46,9 +28,13 @@ main(int argc, char *argv[])
     uint32_t now;
 
     while (scanf("%u", &now) == 1) {
-        uint32_t rev_num = reverse_num(now);
+        uint8_t result_arr[BYTES_IN_NUM];
 
-        write(fd, &rev_num, sizeof(rev_num));
+        for (int i = BYTES_IN_NUM - 1; i >= 0; i--) {
+            result_arr[BYTES_IN_NUM - i - 1] = now >> (i * CHAR_BIT);
+        }
+
+        write(fd, &result_arr, sizeof(result_arr));
     }
 
     close(fd);
