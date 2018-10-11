@@ -7,11 +7,6 @@
 #include <stdint.h>
 #include <limits.h>
 
-enum
-{
-    BYTES_IN_NUM = 4
-};
-
 
 int
 main(int argc, char *argv[])
@@ -28,10 +23,10 @@ main(int argc, char *argv[])
     uint32_t now;
 
     while (scanf("%u", &now) == 1) {
-        uint8_t result_arr[BYTES_IN_NUM];
+        uint8_t result_arr[sizeof(now)];
 
-        for (int i = BYTES_IN_NUM - 1; i >= 0; i--) {
-            result_arr[BYTES_IN_NUM - i - 1] = now >> (i * CHAR_BIT);
+        for (int i = sizeof(now) - 1; i >= 0; i--) {
+            result_arr[sizeof(now) - i - 1] = now >> (i * CHAR_BIT);
         }
 
         write(fd, &result_arr, sizeof(result_arr));
