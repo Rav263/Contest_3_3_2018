@@ -29,7 +29,9 @@ main(int argc, char *argv[])
             result_arr[sizeof(now) - i - 1] = now >> (i * CHAR_BIT);
         }
 
-        write(fd, &result_arr, sizeof(result_arr));
+        if (write(fd, &result_arr, sizeof(result_arr)) != sizeof(result_arr)) {
+            return 1;
+        }
     }
 
     close(fd);
